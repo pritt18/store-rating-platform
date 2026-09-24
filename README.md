@@ -1,6 +1,6 @@
 # 🌟 RateSphere Hub — FullStack Store Rating Platform
 
-A full-stack web application that allows users to submit and modify store ratings (1 to 5 stars) with role-based access control (**System Administrator**, **Normal User**, and **Store Owner**). Built strictly following all specified requirements, best architectural practices, and configured for seamless execution in **Visual Studio Code**.
+A full-stack web application that allows users to submit and modify store ratings (1 to 5 stars) with role-based access control (**System Administrator**, **Normal User**, and **Store Owner**). Built strictly following all specified requirements, modern full-stack development standards, and best architectural practices.
 
 ---
 
@@ -15,12 +15,12 @@ A full-stack web application that allows users to submit and modify store rating
 
 ---
 
-## 🚀 Quick Start Guide (VS Code)
+## 🚀 Quick Start Guide
 
-### 1. Open in Visual Studio Code
-Open VS Code and navigate to the project directory:
+### 1. Navigate to Project Directory
+Open your terminal and navigate to the project directory:
 ```bash
-code e:\SoftspireSolution\store-rating-platform
+cd store-rating-platform
 ```
 
 ### 2. Verify Database Connection
@@ -133,9 +133,6 @@ Both client-side (reactive UI feedback) and server-side (Zod validation middlewa
 
 ```
 store-rating-platform/
-├── .vscode/
-│   ├── launch.json              # VS Code debug configuration
-│   └── tasks.json               # VS Code task runner
 ├── package.json                 # Root script runner (runs backend & frontend concurrently)
 ├── README.md                    # Project documentation
 │
