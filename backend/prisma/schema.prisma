@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+  STORE_OWNER
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(60)
+  email     String    @unique @db.VarChar(255)
+  password  String    @db.VarChar(255)
+  address   String    @db.VarChar(400)
+  role      UserRole  @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  stores    Store[]   @relation("OwnerStores")
+  ratings   Rating[]
+
+  @@map("users")
+}
+
+model Store {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(60)
+  email     String    @db.VarChar(255)
+  address   String    @db.VarChar(400)
+  ownerId   Int?
+  owner     User?     @relation("OwnerStores", fields: [ownerId], references: [id], onDelete: SetNull)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  ratings   Rating[]
+
+  @@map("stores")
+}
+
+model Rating {
+  id        Int       @id @default(autoincrement())
+  rating    Int       // Must be between 1 and 5
+  userId    Int
+  storeId   Int
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  store     Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([userId, storeId], name: "user_store_unique")
+  @@map("ratings")
+}
